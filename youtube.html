@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="2.png">
+    
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Roboto", sans-serif;
+}
+
+h1{
+    font-size: 1.5rem;
+}
+
+h4{
+    font-size: .9rem;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-left: 20px;
+}
+
+h1:hover{
+    cursor: pointer;
+}
+
+i{
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+p,a{
+    font-size: .9rem;
+    color: #fff;
+}
+
+hr{
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 12px 0;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background: #717171;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #202020;
+
+      
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px;
+    padding-left: 40px;
+}
+
+.logo-img{
+    position: relative;
+    height: 50px;
+    width: 50px;
+}
+
+img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    size: 10pc;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+#logo-txt{
+    letter-spacing: -1.5px;
+    color: #fff;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo-container{
+    display: flex;
+    align-items: center;
+}
+
+
+
+.search-container{
+    display: flex;
+    align-items: center;
+    flex: 0 1 685px;
+    margin-left: 40px;
+}
+
+.search-container form{
+    position: relative;
+    width: 100%;
+}
+
+.search-container input{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, .1);
+    padding: 12px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.search{
+    min-width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    background-color: #313131;
+    outline: none;
+    border: none;
+}
+
+.search:hover {
+    cursor: pointer;
+}
+
+.mic{
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #181818;
+}
+
+.mic:hover {
+    cursor: pointer;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-container i{
+    margin-left: 25px;
+}
+
+.profile-box {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 25px;
+}
+
+.profile-container:hover{
+    cursor: pointer;
+}
+
+.body-container{
+    display: flex;
+    position: fixed;
+    height: calc(100vh - 60px);
+    top: 60px;
+}
+
+.sidebar a{
+    text-decoration: none; 
+    color: #fff;
+}
+
+.sidebar{
+    background-color: #212121;
+    width: 240px;
+    overflow-y: scroll;
+    color: #fff;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1pc;
+}
+
+.sidebar-item{
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    cursor: pointer;
+    height: 40px;
+}
+
+.sidebar-item:hover{
+    background-color: #4c4c4c;
+}
+
+.sidebar-item i {
+    margin-right: 24px;
+}
+
+.content{
+    width: calc(100vw - 240px);
+}
+
+.chips-wrapper{
+    overflow-x: scroll;
+    background-color: #181818;
+    display: flex;
+    padding-left: 14px;
+    border-top: rgba(255, 255, 255, 0.1);
+    border-bottom: rgba(255, 255, 255, 0.1);
+}
+
+.chips-wrapper::-webkit-scrollbar {
+    height: 1rem;
+}
+
+.chip{
+    margin: 12px 6px;
+    background-color: #373737;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #fff;
+    transition: .5s;
+}
+
+.chip:hover {
+    background-color: #4d4d4d;
+}
+
+.video-container{
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 1pc;
+    gap: 30px;
+    background-color: #4d4d4d;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+img.ima {
+    margin-top: 70px;
+    margin-left: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25%;
+    width: 25pc;
+    text-align: center;
+    border-radius: 5%;
+}
+
+img.ima:hover{
+    transform: scale(1.4);
+}
+img.imc {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 280px;
+    margin-left: 240px;
+
+}
+
+p.c{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 13pc;
+    margin-left: 3pc;
+    width: 20pc;
+}
+
+h2{
+    display: flex;
+    flex-direction: column;
+    font-size: .9rem;
+    color: rgba(255, 255, 255);
+    margin-top: 14pc;
+    margin-left: 240px;
+}
+img.imd {
+    margin-top: 70px;
+    margin-left: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25%;
+    width: 25pc;
+    text-align: center;
+    border-radius: 5%;
+}
+img.imd:hover{
+    transform: scale(1.4);
+}
+
+img.ime{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 280px;
+    margin-left: 800px;
+
+}
+
+p.e{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -230px;
+    margin-left: 600px;
+    width: 100pc;
+}
+
+img.imf{
+    margin-top: 20pc;
+    margin-left: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25%;
+    width: 25pc;
+    text-align: center;
+    border-radius: 5%;
+}
+
+img.imf:hover{
+    transform: scale(1.4);
+}
+
+img.imh{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 33pc;
+    margin-left: 240px;
+}
+
+img.imj{
+    margin-top: 20pc;
+    margin-left: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25%;
+    width: 25pc;
+    text-align: center;
+    border-radius: 5%;
+}
+
+img.imj:hover{
+    transform: scale(1.4);
+}
+
+img.imk{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 33pc;
+    margin-left: 800px;
+}
+
+img.iml{
+    margin-top: 36pc;
+    margin-left: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25%;
+    width: 25pc;
+    text-align: center;
+    border-radius: 5%;
+}
+
+img.iml:hover{
+    transform: scale(1.4);
+}
+
+img.imz{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 49pc;
+    margin-left: 240px;
+}
+
+img.imx{
+    margin-top: 36pc;
+    margin-left: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 25%;
+    width: 25pc;
+    text-align: center;
+    border-radius: 5%;
+}
+
+img.imx:hover{
+    transform: scale(1.4);
+}
+
+img.imv{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 49pc;
+    margin-left: 800px;
+}
+
+.videos{
+    display: flex;
+    flex-wrap: wrap;
+}
+</style>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <i class="ri-menu-line"></i>
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="https://images.indianexpress.com/2024/02/YouTube-YouTube-1.jpg" alt="">
+                </div>
+                <h1 id="logo-txt">YouTube</h1>
+            </div>
+        </div>
+        <div class="search-container">
+            <form action="">
+                <input type="text" placeholder="Search">
+            </form>
+            <button class="search"><i class="ri-search-line"></i></button>
+            <button class="mic"><i class="ri-mic-fill"></i></button>
+        </div>
+        <div class="profile-container">
+            <i class="ri-video-add-line"></i>
+            <i class="ri-grid-fill"></i>
+            <i class="ri-notification-4-line"></i>
+            <div class="profile-box">
+                <img src="https://yt3.ggpht.com/yti/ANjgQV8CHSML1Sgq5RONDw1bhP3laLdWRjX40hzvtXzvbMfqtQ=s88-c-k-c0x00ffffff-no-rj-mo" alt="">
+            </div>
+            
+    </div>
+    </div>
+    <div class="body-container">
+        <div class="sidebar">
+            <div class="sidebar-items">
+                <a href="" class="sidebar-item"><i class="ri-home-5-line"> Home</i></a>
+                <a href="" class="sidebar-item"><i class="ri-compass-line"> Explore</i></a>
+                <a href="" class="sidebar-item"><i class="ri-wireless-charging-line"> Shorts</i></a>
+                <a href="" class="sidebar-item"><i class="ri-rss-line">Subscriptions</i></a>
+                <hr>
+                <a href="" class="sidebar-item"><i class="ri-links-line"> Libary</i></a>
+                <a href="" class="sidebar-item"><i class="ri-history-line"> History</i></a>
+                <a href="" class="sidebar-item"><i class="ri-time-line"> Watch Later</i></a>
+                <a href="" class="sidebar-item"><i class="ri-video-line"> Your videos</i></a>
+                <a href="" class="sidebar-item"><i class="ri-thumb-up-line"> Liked</i></a>
+                <hr>
+                <h4 class="more">More From Youtube</h4>
+                <a href="" class="sidebar-item"><i class="ri-keyboard-box-line"> Gaming</i></a>
+                <a href="" class="sidebar-item"><i class="ri-live-line"> Live</i></a>
+                <a href="" class="sidebar-item"><i class="ri-award-line"> Sports</i></a>
+                <hr>
+                <a href="" class="sidebar-item"><i class="ri-settings-5-line"> Settings</i></a>
+                <a href="" class="sidebar-item"><i class="ri-flag-line"> Report</i></a>
+                <a href="" class="sidebar-item"><i class="ri-question-line"> Help</i></a>
+                <a href="" class="sidebar-item"><i class="ri-feedback-line"> Send Feedback</i></a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="chips-wrapper">
+                <div class="chip">
+                    <p>All</p>
+                </div>
+                <div class="chip">
+                    <p>Gaming</p>
+                </div>
+                <div class="chip">
+                    <p>HTML</p>
+                </div>
+                <div class="chip">
+                    <p>CSS</p>
+                </div>
+                <div class="chip">
+                    <p>Responsive design</p>
+                </div>
+                <div class="chip">
+                    <p>Live</p>
+                </div>
+                <div class="chip">
+                    <p>UI design</p>
+                </div>
+                <div class="chip">
+                    <p>React</p>
+                </div>
+                <div class="chip">
+                    <p>Node.js</p>
+                </div>
+                <div class="chip">
+                    <p>Java</p>
+                </div>
+                <div class="chip">
+                    <p>UI/UX</p>
+                </div>
+                <div class="chip">
+                    <p>Watched</p>
+                </div>
+                <div class="chip">
+                    <p>New To you</p>
+                </div>
+                <div class="chip">
+                    <p>Comedy</p>
+                </div>
+                <div class="chip">
+                     <p>Drawing</p>
+                </div>
+            </div>
+            <div class="video-container">
+                <div class="videos">
+                    <div class="video"><img class="ima" src="https://i.ytimg.com/vi/HcOc7P5BMi4/maxresdefault.jpg" alt="">
+                        <p class="c">Html Full Tutorial For Beginners |
+                            Complete Html With Codes & Notes</p>
+                    </div>
+                    <div class="channel-logo">
+                        <img class="imc" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA-Og25kej4bBty6OFUHHxlCgKrdvFgUqPDA&s" alt="">
+                    </div>
+                </div>
+                <div class="bulb">
+                    <div class="content-vi"><img class="imd" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQNPRB2aCiIDuTRzSB3scrbKM63gKlVqusvQ&s" alt="">
+                        <p class="e">Introduction To Java Language |<br> 
+                            Lecture 1 | Complete Placement Cource</p>
+                    </div>
+                    <div class="chair">
+                        <img class="ime" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA-Og25kej4bBty6OFUHHxlCgKrdvFgUqPDA&s" alt="">
+                    </div>
+                </div>
+                <div class="light">
+                    <div class="content-vie"><img class="imf" src="https://i.ytimg.com/vi/irqbmMNs2Bo/hqdefault.jpg" alt="">
+                        <p class="g">C Language Tutorial For Beginners <br>
+                        (with notes & practice questions)</p>
+                    </div>
+                    <div class="charger">
+                        <img class="imh" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA-Og25kej4bBty6OFUHHxlCgKrdvFgUqPDA&s" alt="">
+                    </div>
+                </div>
+                <div class="energy">
+                    <div class="content-vid"><img class="imj" src="https://i.ytimg.com/vi/ESnrn1kAD4E/hqdefault.jpg" alt="">
+                    </div>
+                    <div class="coffee">
+                        <img class="imk" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA-Og25kej4bBty6OFUHHxlCgKrdvFgUqPDA&s" alt="">
+                    </div>
+                </div>
+                <div class="em">
+                    <div class="content-vide"><img class="iml" src="https://i.ytimg.com/vi/MZ7h8rcfPo8/maxresdefault.jpg" alt="">
+                    </div>
+                    <div class="coffee">
+                        <img class="imz" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA-Og25kej4bBty6OFUHHxlCgKrdvFgUqPDA&s" alt="">
+                    </div>
+                </div>
+                <div class="em">
+                    <div class="content-vide"><img class="imx" src="https://i.ytimg.com/vi/xZykmhcWGuY/hqdefault.jpg" alt="">
+                    <div class="coffee">
+                        <img class="imv" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA-Og25kej4bBty6OFUHHxlCgKrdvFgUqPDA&s" alt="">
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+</body>
+</html>
